@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>내용증명 의뢰서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap">
+<style>
+/* Layout: 한 화면에 한 단계. 위에 3칸 진행 표시, 가운데 좁은 카드 하나 */
+:root{
+  --bg:#f7f9f8; --surface:#ffffff; --surface-2:#ecf2f1; --ink:#0e1c1b; --ink-soft:#52625f; --line:#dfe7e5;
+  --accent:#0f4c4a; --accent-ink:#ffffff; --accent-soft:#e2efed; --em:#8a5a22; --em-soft:#f6e8d6; --hot:#c08a4e;
+  --head:#0f3b3a; --head-ink:#f6faf9; --brass:#d6a56a;
+  --font:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0a1211; --surface:#111b1a; --surface-2:#182624; --ink:#ecf4f2; --ink-soft:#96a9a5; --line:#22332f;
+  --accent:#7fc8bf; --accent-ink:#0a1211; --accent-soft:#16302e; --em:#e0b07a; --em-soft:#2e2216; --hot:#d9a46a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0a1211; --surface:#111b1a; --surface-2:#182624; --ink:#ecf4f2; --ink-soft:#96a9a5; --line:#22332f;
+  --accent:#7fc8bf; --accent-ink:#0a1211; --accent-soft:#16302e; --em:#e0b07a; --em-soft:#2e2216; --hot:#d9a46a; color-scheme:dark}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.65;word-break:keep-all;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--head)}
+h1,h2{margin:0;letter-spacing:-.03em;line-height:1.3;text-wrap:balance}
+p{margin:0}
+:focus-visible{outline:3px solid var(--hot);outline-offset:2px}
+.wrap{max-width:640px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--head);color:var(--head-ink)}
+header.top .wrap{max-width:1000px;display:flex;justify-content:space-between;align-items:center;height:60px}
+.brand{display:flex;align-items:center;gap:.5rem;text-decoration:none;color:inherit;font-weight:900;font-size:1.1rem;letter-spacing:-.04em}
+.brand-mark{width:30px;height:28px;border-radius:9px;background:var(--brass);position:relative;flex:none}
+.brand-mark::before,.brand-mark::after{content:"";position:absolute;top:50%;width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:radial-gradient(circle at 50% 50%,var(--head) 0 2.3px,#fbf6ee 2.8px)}
+.brand-mark::before{left:5.5px}.brand-mark::after{right:5.5px}
+.back{color:#bcd2ce;text-decoration:none;font-size:.9rem}
+.back:hover{color:#fff}
+
+.intro{padding-block:2rem 1.2rem;display:grid;gap:.4rem}
+.intro h1{font-size:clamp(1.5rem,4.5vw,1.9rem);font-weight:900}
+.intro p{color:var(--ink-soft)}
+
+.progress{display:grid;grid-template-columns:repeat(3,1fr);gap:.4rem;margin-bottom:1.2rem}
+.progress button{all:unset;cursor:pointer;display:grid;gap:.35rem;font-size:.8rem;color:var(--ink-soft);font-weight:600}
+.progress button::before{content:"";height:5px;border-radius:99px;background:var(--line)}
+.progress button.on{color:var(--ink)}
+.progress button.on::before,.progress button.done::before{background:var(--accent)}
+.progress button:focus-visible{outline:2px solid var(--hot);outline-offset:4px;border-radius:4px}
+
+.card{background:var(--surface);border-radius:24px;box-shadow:inset 0 0 0 1px var(--line),0 14px 34px -20px rgba(10,30,28,.25);padding:1.8rem;display:grid;gap:1.3rem;min-width:0}
+@media (max-width:520px){.card{padding:1.3rem;border-radius:20px}}
+.card h2{font-size:1.35rem;font-weight:800}
+.card .sub{color:var(--ink-soft);font-size:.93rem;margin-top:-.8rem}
+
+/* 유형 */
+.types{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.6rem}
+@media (max-width:400px){.types{grid-template-columns:1fr}}
+.types button{all:unset;box-sizing:border-box;cursor:pointer;padding:.85rem 1rem;border-radius:14px;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);display:grid;gap:.1rem;transition:box-shadow .15s ease}
+.types button b{font-size:.97rem}
+.types button span{font-size:.8rem;color:var(--ink-soft);line-height:1.45}
+.types button:hover{box-shadow:inset 0 0 0 2px var(--accent)}
+.types button[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--accent);background:var(--accent-soft)}
+.types button:focus-visible{outline:3px solid var(--hot)}
+
+/* 입력 */
+.field{display:grid;gap:.35rem;min-width:0}
+.field label,.field .lbl{font-weight:700;font-size:.92rem}
+.opt{font-weight:500;color:var(--ink-soft);font-size:.8rem;margin-left:.25rem}
+.req{color:var(--em);margin-left:.15rem}
+input[type=text],input[type=tel],input[type=date],textarea{font:inherit;font-size:1rem;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:.75rem .85rem;width:100%;min-width:0}
+textarea{min-height:180px;resize:vertical;line-height:1.65}
+input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0;border-color:var(--accent)}
+.invalid{outline:2px solid var(--em)!important;border-color:var(--em)!important}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+@media (max-width:520px){.row{grid-template-columns:1fr}}
+.guide{background:var(--em-soft);border-radius:14px;padding:.9rem 1rem;font-size:.88rem}
+.guide b{display:block;font-size:.82rem;color:var(--em);margin-bottom:.3rem}
+.guide ul{margin:0;padding-left:1.1rem;display:grid;gap:.15rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chips label{position:relative}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips span{display:block;padding:.4rem .85rem;border-radius:999px;font-size:.85rem;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer}
+.chips input:checked+span{background:var(--accent);color:var(--accent-ink);box-shadow:none}
+.chips input:focus-visible+span{outline:3px solid var(--hot)}
+.calc{border-radius:14px;padding:.85rem 1rem;background:var(--accent-soft);font-size:.9rem;display:grid;gap:.2rem}
+.calc .big{font-weight:800;color:var(--accent)}
+.calc.late{background:var(--em-soft)}
+.calc.late .big{color:var(--em)}
+.calc small{color:var(--ink-soft);font-size:.78rem}
+.plans{display:grid;gap:.5rem}
+.plans label{display:grid;grid-template-columns:auto 1fr auto;gap:.7rem;align-items:center;padding:.8rem 1rem;border-radius:14px;background:var(--bg);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;font-size:.93rem}
+.plans label:has(input:checked){box-shadow:inset 0 0 0 2px var(--accent);background:var(--accent-soft)}
+.plans b{font-variant-numeric:tabular-nums}
+.plans small{display:block;color:var(--ink-soft);font-size:.78rem}
+.agree{display:flex;gap:.55rem;align-items:flex-start;font-size:.88rem;color:var(--ink-soft)}
+.agree input{margin-top:.3rem;width:18px;height:18px;flex:none}
+
+.nav{display:flex;justify-content:space-between;align-items:center;gap:.8rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;height:52px;padding:0 1.6rem;border-radius:999px;font:700 1rem/1 var(--font);border:0;cursor:pointer;text-decoration:none}
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-ghost{background:transparent;color:var(--ink-soft);box-shadow:inset 0 0 0 1px var(--line)}
+.err{color:var(--em);font-size:.88rem;font-weight:600}
+.saved{font-size:.78rem;color:var(--ink-soft);text-align:center;padding-block:1rem 3rem}
+
+.done{text-align:center;justify-items:center}
+.done .ok{width:64px;height:64px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-size:1.8rem;font-weight:900}
+.summary{text-align:left;width:100%;background:var(--bg);border-radius:14px;padding:1rem 1.1rem;font-size:.9rem;display:grid;gap:.4rem}
+.summary div{display:grid;grid-template-columns:5.5rem 1fr;gap:.6rem}
+.summary dt{color:var(--ink-soft)}
+.summary dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.note{font-size:.82rem;color:var(--ink-soft)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>바로바</a>
+    <a class="back" href="index.html">← 홈으로</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">
+    <h1>내용증명 의뢰하기</h1>
+    <p>3단계, 약 3분이면 끝납니다. 모르는 건 비워 두세요. 변호사가 읽고 전화로 여쭤봅니다.</p>
+  </div>
+
+  <nav class="progress" aria-label="진행 단계">
+    <button type="button" id="pg1">1. 어떤 일인가요</button>
+    <button type="button" id="pg2">2. 무슨 일인지</button>
+    <button type="button" id="pg3">3. 연락처</button>
+  </nav>
+
+  <form id="f" novalidate>
+    <!-- 1 -->
+    <section class="card" id="s1">
+      <h2>어떤 일로 보내시나요?</h2>
+      <p class="sub">가장 가까운 것을 하나 골라 주세요.</p>
+      <div class="types" id="types" role="group" aria-label="사건 유형"></div>
+    </section>
+
+    <!-- 2 -->
+    <section class="card" id="s2" hidden>
+      <h2 id="s2title">무슨 일인지 알려 주세요</h2>
+      <div class="guide" id="guide"><b>이런 내용이 있으면 좋아요</b><ul id="guideList"></ul></div>
+      <div class="field" id="endWrap" hidden>
+        <label for="endDate">계약 만료일 <span class="opt">넣으면 통지 기한을 계산해 드려요</span></label>
+        <div class="row">
+          <input type="date" id="endDate" name="endDate">
+          <div class="chips" role="group" aria-label="건물과 입장">
+            <label><input type="radio" name="kind" id="kind-h" value="주택" checked><span>주택</span></label>
+            <label><input type="radio" name="kind" id="kind-s" value="상가"><span>상가</span></label>
+            <label><input type="radio" name="role" id="role-l" value="임대인" checked><span>임대인</span></label>
+            <label><input type="radio" name="role" id="role-t" value="임차인"><span>임차인</span></label>
+          </div>
+        </div>
+        <div class="calc" id="calc" hidden aria-live="polite"></div>
+      </div>
+      <div class="field">
+        <label for="story">사연<span class="req">*</span></label>
+        <textarea id="story" name="story" placeholder="편하게 적어 주세요. 날짜와 금액은 대략이어도 괜찮습니다."></textarea>
+      </div>
+      <div class="field">
+        <label for="want">상대방에게 원하는 것 <span class="opt">선택</span></label>
+        <input type="text" id="want" name="want">
+      </div>
+      <div class="field">
+        <label for="files">자료 <span class="opt">선택 · 계약서, 이체 내역, 대화 캡처 등</span></label>
+        <input type="file" id="files" name="files" multiple>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="card" id="s3" hidden>
+      <h2>연락받을 곳을 알려 주세요</h2>
+      <div class="row">
+        <div class="field"><label for="name">이름<span class="req">*</span></label><input type="text" id="name" name="name" autocomplete="name"></div>
+        <div class="field"><label for="phone">휴대폰<span class="req">*</span></label><input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="010-0000-0000"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="tname">상대방 이름 <span class="opt">선택</span></label><input type="text" id="tname" name="tname"></div>
+        <div class="field"><label for="taddr">상대방 주소 <span class="opt">모르면 비워 두세요</span></label><input type="text" id="taddr" name="taddr"></div>
+      </div>
+      <div class="field">
+        <span class="lbl">플랜</span>
+        <div class="plans" role="radiogroup" aria-label="플랜">
+          <label><input type="radio" name="plan" id="plan-review" value="review"><span>검토 발송<small>직접 쓴 글을 변호사가 검토해 발송</small></span><b>49,000원</b></label>
+          <label><input type="radio" name="plan" id="plan-write" value="write" checked><span>작성 발송<small>변호사가 직접 작성해 발송</small></span><b>99,000원</b></label>
+          <label><input type="radio" name="plan" id="plan-full" value="full"><span>상담 + 사후 대응<small>전화 상담, 회신 대응까지</small></span><b>440,000원</b></label>
+        </div>
+      </div>
+      <label class="agree" for="agree"><input type="checkbox" id="agree" name="agree"><span><b style="color:var(--ink)">[필수]</b> 개인정보 수집·이용에 동의합니다. 입력한 내용과 자료는 내용증명 작성과 상담에만 쓰고, 사건 종료 후 3년 뒤 폐기합니다.</span></label>
+    </section>
+
+    <!-- 완료 -->
+    <section class="card done" id="s4" hidden>
+      <div class="ok" aria-hidden="true">✓</div>
+      <h2>의뢰서를 받았습니다</h2>
+      <p class="note">시안이라 실제로는 전송되지 않았습니다. 실제 사이트에서는 여기서 결제 창이 열리고, 변호사가 영업일 24시간 안에 연락드립니다.</p>
+      <dl class="summary" id="summary"></dl>
+      <button type="button" class="btn btn-ghost" id="restart">처음부터 다시 쓰기</button>
+    </section>
+
+    <div class="nav" id="nav" style="margin-top:1rem">
+      <button type="button" class="btn btn-ghost" id="prev">이전</button>
+      <span class="err" id="err" role="alert"></span>
+      <button type="button" class="btn btn-primary" id="next">다음</button>
+    </div>
+  </form>
+  <p class="saved" id="saved">작성 중인 내용은 이 브라우저에 임시 저장됩니다.</p>
+</main>
+
+<script>
+(function(){
+'use strict';
+var T={
+  renew:{l:'임대차 갱신·종료 통지',d:'만료 전 갱신 요구·거절·종료',g:['언제 계약했고, 언제 만료되는지','갱신을 요구하는지, 거절하는지, 끝내려는지','거절한다면 그 이유 (예: 직접 들어가 살 예정)','이미 문자나 내용증명으로 알린 적이 있는지'],w:'예: 만료일에 집을 비워 주세요'},
+  deposit:{l:'전세·월세 보증금',d:'보증금을 돌려받지 못함',g:['계약 기간과 보증금','언제 끝났는지 (또는 끝나는지)','이사일·반환일을 약속한 적이 있는지','늦어지면 생기는 손해 (새 집 위약금 등)'],w:'예: 보증금 3억 원을 이사일에 돌려주세요'},
+  loan:{l:'빌려준 돈',d:'빌려준 돈을 돌려받지 못함',g:['언제, 얼마를, 어떻게 빌려줬는지','갚기로 한 날','일부라도 돌려받았는지','상대방이 갚겠다고 한 말이나 문자'],w:'예: 남은 1,200만 원을 갚아 주세요'},
+  payment:{l:'물품·용역 대금',d:'납품·작업 대금 미지급',g:['무엇을 언제 납품했는지 (또는 무슨 일을 했는지)','총 대금과 못 받은 금액','지급하기로 한 날'],w:'예: 남은 대금 600만 원을 지급해 주세요'},
+  wage:{l:'임금·퇴직금',d:'퇴사 후 임금·퇴직금 미지급',g:['입사일과 퇴사일','못 받은 월급·퇴직금 금액','회사 이름과 대표자'],w:'예: 10월 월급과 퇴직금을 지급해 주세요'},
+  contract:{l:'계약 해지·해제',d:'상대방 위반으로 계약을 끝냄',g:['어떤 계약인지 (날짜, 금액)','상대방이 지키지 않은 것','이행하라고 요구한 적이 있는지'],w:'예: 계약을 해제하고 계약금을 돌려주세요'},
+  defame:{l:'명예훼손·모욕 중단',d:'게시글·반복 연락 중단',g:['어디에, 언제, 어떤 글이 올라왔는지 (주소)','무엇이 사실과 다른지','입은 피해'],w:'예: 게시글을 삭제하고 사과해 주세요'},
+  noise:{l:'소음·진동 등 생활 피해',d:'이웃의 소음·진동 중단',g:['어디서, 언제부터 피해가 있는지','측정한 수치가 있다면','상대방과 얘기해 본 적이 있는지 (날짜)'],w:'예: 방음공사를 해 주세요'},
+  damage:{l:'손해배상 청구',d:'사고·하자로 입은 손해',g:['언제, 어디서, 무슨 일이 있었는지','손해 항목과 금액','상대방 책임이라고 보는 이유'],w:'예: 수리비 470만 원을 배상해 주세요'},
+  records:{l:'자료·서류 제출 요청',d:'전 임원·관계자에게 서류 요청',g:['어느 단체이고 대표자는 누구인지','상대방이 언제 어떤 역할을 했는지','받아야 할 서류 목록'],w:'예: 계약서와 관련 서류를 제출해 주세요'},
+  received:{l:'받은 내용증명 답변',d:'받은 내용증명에 반박',g:['누가, 언제 보냈는지','상대방이 요구하는 것','인정하는 부분과 아닌 부분'],w:'예: 요구에 응할 수 없다고 답해 주세요'},
+  etc:{l:'기타',d:'위에 없는 일',g:['언제, 누구와, 무슨 일이 있었는지','상대방에게 원하는 것'],w:''}
+};
+var KEY='boara-intake-simple';
+var f=document.getElementById('f'),step=1,type=null;
+var $=function(id){return document.getElementById(id)};
+
+/* 유형 버튼 */
+Object.keys(T).forEach(function(k){
+  var b=document.createElement('button');b.type='button';b.id='type-'+k;b.setAttribute('aria-pressed','false');
+  var t=document.createElement('b');t.textContent=T[k].l;var d=document.createElement('span');d.textContent=T[k].d;
+  b.appendChild(t);b.appendChild(d);
+  b.addEventListener('click',function(){setType(k);go(2);});
+  $('types').appendChild(b);
+});
+function setType(k){
+  type=k;
+  [].forEach.call($('types').children,function(b){b.setAttribute('aria-pressed',String(b.id==='type-'+k))});
+  $('s2title').textContent=T[k].l;
+  var ul=$('guideList');ul.innerHTML='';
+  T[k].g.forEach(function(g){var li=document.createElement('li');li.textContent=g;ul.appendChild(li);});
+  $('want').placeholder=T[k].w||'';
+  $('endWrap').hidden=k!=='renew';
+  calc();save();
+}
+
+/* 갱신 통지 기한 계산 */
+function addM(d,m){var r=new Date(d.getFullYear(),d.getMonth()+m,d.getDate());if(r.getDate()!==d.getDate())r.setDate(0);return r}
+function fd(d){return d.getFullYear()+'. '+(d.getMonth()+1)+'. '+d.getDate()+'.'}
+function rnText(){
+  var v=$('endDate').value;if(!v||type!=='renew')return '';
+  var p=v.split('-'),end=new Date(+p[0],+p[1]-1,+p[2]);
+  var kind=f.kind.value,role=f.role.value,from=addM(end,-6),to=addM(end,kind==='상가'?-1:-2);
+  if(kind==='주택'&&role==='임차인')from=null;
+  return {from:from,to:to,kind:kind,role:role};
+}
+function calc(){
+  var w=rnText(),box=$('calc');
+  if(!w){box.hidden=true;return}
+  var today=new Date();today.setHours(0,0,0,0);var left=Math.round((w.to-today)/864e5);
+  box.hidden=false;box.className='calc'+(left<0?' late':'');box.innerHTML='';
+  var a=document.createElement('span');a.className='big';a.textContent=(w.from?fd(w.from)+' ~ ':'')+fd(w.to)+'까지 상대방에게 도달해야 합니다';
+  var b=document.createElement('span');b.textContent=left<0?'기한이 '+(-left)+'일 지났습니다. 이미 연장되었는지 변호사가 확인해 드립니다.':'마감까지 '+left+'일 남았습니다.'+(left<=10?' 우편 도달에 2~3일 걸리니 서둘러 주세요.':'');
+  var c=document.createElement('small');c.textContent=w.kind+' '+w.role+' 기준. 정확한 기한은 변호사가 다시 확인합니다.';
+  box.appendChild(a);box.appendChild(b);box.appendChild(c);
+}
+['endDate','kind-h','kind-s','role-l','role-t'].forEach(function(id){$(id).addEventListener('change',calc)});
+
+/* 단계 이동 */
+function go(n){
+  step=n;
+  [1,2,3,4].forEach(function(i){$('s'+i).hidden=i!==n});
+  [1,2,3].forEach(function(i){var b=$('pg'+i);b.classList.toggle('on',i===n);b.classList.toggle('done',i<n||n===4);});
+  $('nav').hidden=n===4;$('saved').hidden=n===4;
+  $('prev').style.visibility=n===1?'hidden':'visible';
+  $('next').hidden=n===1;
+  $('next').textContent=n===3?'의뢰서 보내기':'다음';
+  $('err').textContent='';
+  if(n===4)summary();
+  window.scrollTo(0,0);
+}
+function check(n){
+  var msg='';[].forEach.call(document.querySelectorAll('.invalid'),function(e){e.classList.remove('invalid')});
+  if(n>=2&&!type){go(1);return false}
+  if(n===2&&!$('story').value.trim()){$('story').classList.add('invalid');msg='사연을 한두 줄이라도 적어 주세요.';}
+  if(n===3){
+    if(!$('name').value.trim()){$('name').classList.add('invalid');msg='이름과 휴대폰 번호를 적어 주세요.';}
+    if(!$('phone').value.trim()){$('phone').classList.add('invalid');msg='이름과 휴대폰 번호를 적어 주세요.';}
+    if(!msg&&!$('agree').checked){msg='개인정보 수집·이용에 동의해 주세요.';}
+  }
+  $('err').textContent=msg;return !msg;
+}
+$('prev').addEventListener('click',function(){if(step>1)go(step-1)});
+$('next').addEventListener('click',function(){if(check(step))go(step+1)});
+[1,2,3].forEach(function(i){$('pg'+i).addEventListener('click',function(){
+  if(i===1||(i===2&&type)||(i===3&&type&&$('story').value.trim()))go(i);else if(check(step))go(Math.min(i,step+1));
+})});
+$('restart').addEventListener('click',function(){f.reset();type=null;try{localStorage.removeItem(KEY)}catch(e){}
+  [].forEach.call($('types').children,function(b){b.setAttribute('aria-pressed','false')});calc();go(1);});
+
+function summary(){
+  var plan=f.querySelector('input[name=plan]:checked');
+  var w=rnText();
+  var rows=[['유형',T[type].l],['사연',$('story').value.trim()],['원하는 것',$('want').value.trim()],
+    ['통지 기한',w?((w.from?fd(w.from)+' ~ ':'')+fd(w.to)+'까지'):''],
+    ['자료',$('files').files.length?$('files').files.length+'개':''],['이름',$('name').value.trim()],['휴대폰',$('phone').value.trim()],
+    ['상대방',[$('tname').value.trim(),$('taddr').value.trim()].filter(Boolean).join(' / ')],
+    ['플랜',plan?plan.parentNode.querySelector('span').firstChild.textContent+' · '+plan.parentNode.querySelector('b').textContent:'']];
+  var dl=$('summary');dl.innerHTML='';
+  rows.forEach(function(r){if(!r[1])return;var d=document.createElement('div');var dt=document.createElement('dt');dt.textContent=r[0];var dd=document.createElement('dd');dd.textContent=r[1];d.appendChild(dt);d.appendChild(dd);dl.appendChild(d);});
+}
+
+/* 임시 저장 */
+var FIELDS=['story','want','endDate','name','phone','tname','taddr'];
+function save(){try{var o={type:type,plan:(f.querySelector('input[name=plan]:checked')||{}).value,kind:f.kind.value,role:f.role.value};
+  FIELDS.forEach(function(k){o[k]=$(k).value});localStorage.setItem(KEY,JSON.stringify(o));}catch(e){}}
+f.addEventListener('input',save);f.addEventListener('change',save);
+var o=null;try{o=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+if(o){FIELDS.forEach(function(k){if(o[k])$(k).value=o[k]});
+  if(o.plan&&$('plan-'+o.plan))$('plan-'+o.plan).checked=true;
+  if(o.kind==='상가')$('kind-s').checked=true;if(o.role==='임차인')$('role-t').checked=true;
+  if(o.type&&T[o.type])setType(o.type);}
+
+/* 메인 페이지에서 넘어온 경우 */
+function route(){
+  var h=(location.hash||'').slice(1),start=1;
+  if(['review','write','full'].indexOf(h)>-1){$('plan-'+h).checked=true;start=type?2:1;}
+  if(h.indexOf('t-')===0&&T[h.slice(2)]){setType(h.slice(2));start=2;}
+  var sm=/^s-([1-3])$/.exec(h);if(sm){start=+sm[1];if(start>1&&!type)start=1;}
+  go(start);
+}
+window.addEventListener('hashchange',route);
+route();
+})();
+</script>
+</body>
+</html>

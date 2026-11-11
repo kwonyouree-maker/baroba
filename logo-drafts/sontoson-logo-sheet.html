@@ -1,0 +1,119 @@
+<title>손투손 로고</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700;900&display=swap">
+<style>
+/* Layout: 단순한 로고 시트. 대표 로고 → 바탕별 4칸 → 아이콘 → 색상 */
+:root{--bg:#f6f7fa;--surface:#ffffff;--ink:#13213f;--ink-soft:#5a6172;--line:#e3e7ee;
+  --font:"Noto Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;--word:"Jua","Noto Sans KR",sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0d1220;--surface:#151b2c;--ink:#f1f2f7;--ink-soft:#a3a9bb;--line:#283048;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1220;--surface:#151b2c;--ink:#f1f2f7;--ink-soft:#a3a9bb;--line:#283048;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);margin:0;word-break:keep-all}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));padding-block:3rem 4rem;display:grid;gap:2.4rem}
+header h1{margin:0;font-size:1.5rem;font-weight:900;letter-spacing:-.03em}
+header p{margin:.4rem 0 0;color:var(--ink-soft)}
+h2{margin:0 0 1rem;font-size:1rem;font-weight:800}
+.lockup{display:inline-flex;align-items:center;gap:.12em;color:var(--lk,#0e1c1b)}
+.lockup .m{width:1.05em;height:1.14em;flex:none}
+.word{font-family:var(--word);font-weight:400;line-height:1}
+.word .to{color:var(--to,#b07a3e)}
+.hero{background:#ffffff;border-radius:28px;min-height:280px;display:grid;place-items:center;box-shadow:inset 0 0 0 1px #e9edf3;font-size:clamp(3.4rem,10vw,6rem)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}
+@media (max-width:680px){.grid{grid-template-columns:1fr}}
+.tile{border-radius:20px;min-height:190px;display:grid;place-items:center;position:relative;font-size:3rem;padding:2rem 1rem 2.6rem}
+.tile .cap{position:absolute;left:1.1rem;bottom:.9rem;font:700 .76rem var(--font);opacity:.7}
+.t1{background:#fff;box-shadow:inset 0 0 0 1px #e9edf3;color:#0e1c1b}
+.t2{background:#0f3b3a;color:#f6faf9;--hand:#D6A56A;--lk:#ffffff;--to:#D6A56A}
+.t3{background:#d6a56a;color:#0f3b3a;--hand:#0F3B3A;--lk:#0f3b3a;--to:#fffaf2}
+.t4{background:#f2e7d8;color:#0e1c1b;--hand:#0F4C4A;--lk:#0e1c1b;--to:#b07a3e}
+.icons{display:flex;flex-wrap:wrap;align-items:flex-end;gap:1.6rem}
+.sz{display:grid;justify-items:center;gap:.45rem;font-size:.75rem;color:var(--ink-soft)}
+.app{width:112px;height:112px;border-radius:26px;display:grid;place-items:center}
+.app svg{width:64px;height:70px}
+.a1{background:#0f3b3a;--hand:#D6A56A}
+.a2{background:#d6a56a;--hand:#0F3B3A}
+.a3{background:#f2e7d8;--hand:#0F4C4A}
+.fav{display:grid;place-items:center;border-radius:7px;background:#0f3b3a;--hand:#D6A56A}
+.swatches{display:flex;flex-wrap:wrap;gap:.8rem}
+.sw{display:grid;gap:.3rem;font-size:.8rem}
+.sw i{display:block;width:120px;height:60px;border-radius:14px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.sw span{color:var(--ink-soft);font-family:ui-monospace,Menlo,monospace}
+.notes{background:var(--surface);border-radius:20px;padding:1.3rem 1.5rem;box-shadow:inset 0 0 0 1px var(--line);display:grid;gap:.4rem;font-size:.92rem;line-height:1.7}
+.notes p{margin:0}
+.opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}
+@media (max-width:720px){.opts{grid-template-columns:1fr}}
+.opt{background:#fff;border-radius:20px;box-shadow:inset 0 0 0 1px #e9edf3;padding:1.6rem 1rem 1.2rem;display:grid;justify-items:center;gap:.9rem;position:relative;color:#0e1c1b}
+.opt .tag{position:absolute;left:1rem;top:.9rem;font:800 .8rem var(--font);color:#b07a3e}
+.opt .opt-b{width:150px;height:136px}
+.opt .opt-l{font-size:2.2rem;color:#0e1c1b}
+.opt .opt-s{width:1.2em;height:1.09em;flex:none}
+.opt p{margin:0;font-size:.85rem;color:#5a6172}
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="hand" viewBox="-4 -2 70 76">
+  <g fill="var(--hand,#0F4C4A)" transform="rotate(-14 34 40)">
+    <rect x="15" y="13" width="10" height="32" rx="5"/>
+    <rect x="26" y="6" width="10" height="36" rx="5"/>
+    <rect x="37" y="8" width="10" height="34" rx="5"/>
+    <rect x="48" y="16" width="9.5" height="28" rx="4.75"/>
+    <rect x="15" y="31" width="42.5" height="36" rx="16"/>
+    <rect x="14" y="36" width="11" height="24" rx="5.5" transform="rotate(-42 19.5 58)"/>
+  </g>
+</symbol></svg>
+
+<div class="wrap">
+  <header>
+    <h1>손투손 로고</h1>
+    <p>손 하나와 이름만 남긴 단순한 로고입니다. 아래에서 더 귀여운 손 세 가지 안을 비교해 보세요.</p>
+  </header>
+
+  <div class="hero" aria-label="손투손 로고"><div class="lockup"><svg class="m" aria-hidden="true"><use href="#hand"/></svg><b class="word">손<span class="to">투</span>손</b></div></div>
+
+  <section>
+    <h2>더 귀여운 손 · 세 가지 안</h2>
+    <div class="opts">
+      <div class="opt"><span class="tag">A안</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -4 84 76" class="opt-b" aria-hidden="true"><g fill="#0F4C4A"><rect x="11" y="14" width="12" height="28" rx="6" transform="rotate(-16 17 36)"/><rect x="22" y="9" width="12" height="33" rx="6" transform="rotate(-6 28 36)"/><rect x="33" y="10" width="12" height="32" rx="6" transform="rotate(5 39 36)"/><rect x="43" y="15" width="12" height="27" rx="6" transform="rotate(15 49 36)"/><rect x="10" y="27" width="46" height="40" rx="20"/><rect x="5" y="34" width="12" height="20" rx="6" transform="rotate(-52 13 52)"/></g></svg><div class="lockup opt-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -4 84 76" class="opt-s" aria-hidden="true"><g fill="#0F4C4A"><rect x="11" y="14" width="12" height="28" rx="6" transform="rotate(-16 17 36)"/><rect x="22" y="9" width="12" height="33" rx="6" transform="rotate(-6 28 36)"/><rect x="33" y="10" width="12" height="32" rx="6" transform="rotate(5 39 36)"/><rect x="43" y="15" width="12" height="27" rx="6" transform="rotate(15 49 36)"/><rect x="10" y="27" width="46" height="40" rx="20"/><rect x="5" y="34" width="12" height="20" rx="6" transform="rotate(-52 13 52)"/></g></svg><b class="word">손<span class="to">투</span>손</b></div><p>통통한 아기 손</p></div>
+      <div class="opt"><span class="tag">B안</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -4 84 76" class="opt-b" aria-hidden="true"><g fill="#0F4C4A"><rect x="11" y="14" width="12" height="28" rx="6" transform="rotate(-16 17 36)"/><rect x="22" y="9" width="12" height="33" rx="6" transform="rotate(-6 28 36)"/><rect x="33" y="10" width="12" height="32" rx="6" transform="rotate(5 39 36)"/><rect x="43" y="15" width="12" height="27" rx="6" transform="rotate(15 49 36)"/><rect x="10" y="27" width="46" height="40" rx="20"/><rect x="5" y="34" width="12" height="20" rx="6" transform="rotate(-52 13 52)"/></g><g fill="none" stroke="#D6A56A" stroke-width="3.2" stroke-linecap="round"><path d="M60 8 q5 4 4 11"/><path d="M66 2 q8 6 7 17"/></g></svg><div class="lockup opt-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -4 84 76" class="opt-s" aria-hidden="true"><g fill="#0F4C4A"><rect x="11" y="14" width="12" height="28" rx="6" transform="rotate(-16 17 36)"/><rect x="22" y="9" width="12" height="33" rx="6" transform="rotate(-6 28 36)"/><rect x="33" y="10" width="12" height="32" rx="6" transform="rotate(5 39 36)"/><rect x="43" y="15" width="12" height="27" rx="6" transform="rotate(15 49 36)"/><rect x="10" y="27" width="46" height="40" rx="20"/><rect x="5" y="34" width="12" height="20" rx="6" transform="rotate(-52 13 52)"/></g><g fill="none" stroke="#D6A56A" stroke-width="3.2" stroke-linecap="round"><path d="M60 8 q5 4 4 11"/><path d="M66 2 q8 6 7 17"/></g></svg><b class="word">손<span class="to">투</span>손</b></div><p>A + 손 흔드는 표시</p></div>
+      <div class="opt"><span class="tag">C안</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -4 84 76" class="opt-b" aria-hidden="true"><g fill="#0F4C4A"><rect x="11" y="14" width="12" height="28" rx="6" transform="rotate(-16 17 36)"/><rect x="22" y="9" width="12" height="33" rx="6" transform="rotate(-6 28 36)"/><rect x="33" y="10" width="12" height="32" rx="6" transform="rotate(5 39 36)"/><rect x="43" y="15" width="12" height="27" rx="6" transform="rotate(15 49 36)"/><rect x="10" y="27" width="46" height="40" rx="20"/><rect x="5" y="34" width="12" height="20" rx="6" transform="rotate(-52 13 52)"/></g><circle cx="27" cy="45" r="2.4" fill="#fff"/><circle cx="41" cy="45" r="2.4" fill="#fff"/><path d="M30.5 51 q3.5 3 7 0" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/><ellipse cx="25" cy="52" rx="4.2" ry="2.8" fill="#F2A7A0"/><ellipse cx="43" cy="52" rx="4.2" ry="2.8" fill="#F2A7A0"/></svg><div class="lockup opt-l"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -4 84 76" class="opt-s" aria-hidden="true"><g fill="#0F4C4A"><rect x="11" y="14" width="12" height="28" rx="6" transform="rotate(-16 17 36)"/><rect x="22" y="9" width="12" height="33" rx="6" transform="rotate(-6 28 36)"/><rect x="33" y="10" width="12" height="32" rx="6" transform="rotate(5 39 36)"/><rect x="43" y="15" width="12" height="27" rx="6" transform="rotate(15 49 36)"/><rect x="10" y="27" width="46" height="40" rx="20"/><rect x="5" y="34" width="12" height="20" rx="6" transform="rotate(-52 13 52)"/></g><circle cx="27" cy="45" r="2.4" fill="#fff"/><circle cx="41" cy="45" r="2.4" fill="#fff"/><path d="M30.5 51 q3.5 3 7 0" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/><ellipse cx="25" cy="52" rx="4.2" ry="2.8" fill="#F2A7A0"/><ellipse cx="43" cy="52" rx="4.2" ry="2.8" fill="#F2A7A0"/></svg><b class="word">손<span class="to">투</span>손</b></div><p>A + 웃는 얼굴</p></div>
+    </div>
+  </section>
+
+
+
+  <section>
+    <h2>바탕별 사용</h2>
+    <div class="grid">
+      <div class="tile t1"><div class="lockup"><svg class="m" aria-hidden="true"><use href="#hand"/></svg><b class="word">손<span class="to">투</span>손</b></div><span class="cap">밝은 바탕</span></div>
+      <div class="tile t2"><div class="lockup"><svg class="m" aria-hidden="true"><use href="#hand"/></svg><b class="word">손<span class="to">투</span>손</b></div><span class="cap">청록 바탕</span></div>
+      <div class="tile t3"><div class="lockup"><svg class="m" aria-hidden="true"><use href="#hand"/></svg><b class="word">손<span class="to">투</span>손</b></div><span class="cap">브라스 바탕</span></div>
+      <div class="tile t4"><div class="lockup"><svg class="m" aria-hidden="true"><use href="#hand"/></svg><b class="word">손<span class="to">투</span>손</b></div><span class="cap">모래색 바탕</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>아이콘 · 작은 크기</h2>
+    <div class="icons">
+      <div class="sz"><div class="app a1"><svg aria-hidden="true"><use href="#hand"/></svg></div>청록</div>
+      <div class="sz"><div class="app a2"><svg aria-hidden="true"><use href="#hand"/></svg></div>브라스</div>
+      <div class="sz"><div class="app a3"><svg aria-hidden="true"><use href="#hand"/></svg></div>모래색</div>
+      <div class="sz"><div class="fav" style="width:32px;height:32px"><svg width="20" height="22" aria-hidden="true"><use href="#hand"/></svg></div>32px</div>
+      <div class="sz"><div class="fav" style="width:16px;height:16px;border-radius:4px"><svg width="11" height="12" aria-hidden="true"><use href="#hand"/></svg></div>16px</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>색상</h2>
+    <div class="swatches">
+      <div class="sw"><i style="background:#0f4c4a"></i><b>청록</b><span>#0F4C4A</span></div>
+      <div class="sw"><i style="background:#0f3b3a"></i><b>짙은 청록</b><span>#0F3B3A</span></div>
+      <div class="sw"><i style="background:#d6a56a"></i><b>브라스</b><span>#D6A56A</span></div>
+      <div class="sw"><i style="background:#f2e7d8"></i><b>모래색</b><span>#F2E7D8</span></div>
+    </div>
+  </section>
+
+  <div class="notes">
+    <p><b>모양</b> 통통한 손바닥 하나, 한 가지 색. 살짝 기울여 손을 흔드는 느낌을 줬습니다.</p>
+    <p><b>글자</b> 둥근 무료 한글 서체 '주아체'. "투"만 강조색입니다.</p>
+  </div>
+</div>
