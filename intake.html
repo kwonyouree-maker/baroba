@@ -127,7 +127,7 @@ input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0;bord
 <main class="wrap">
   <div class="intro">
     <h1>내용증명 의뢰하기</h1>
-    <p>3단계, 약 3분이면 끝납니다. 모르는 건 비워 두세요. 변호사가 읽고 전화로 여쭤봅니다.</p>
+    <p>3단계, 약 3분이면 끝납니다. 모르는 건 비워 두세요. 읽어 보고 빠진 내용은 전화나 카톡으로 여쭤봅니다.</p>
   </div>
 
   <nav class="progress" aria-label="진행 단계">
@@ -189,9 +189,9 @@ input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0;bord
       <div class="field">
         <span class="lbl">플랜</span>
         <div class="plans" role="radiogroup" aria-label="플랜">
-          <label><input type="radio" name="plan" id="plan-review" value="review"><span>검토 발송<small>직접 쓴 글을 변호사가 검토해 발송</small></span><b>49,000원</b></label>
-          <label><input type="radio" name="plan" id="plan-write" value="write" checked><span>작성 발송<small>변호사가 직접 작성해 발송</small></span><b>99,000원</b></label>
-          <label><input type="radio" name="plan" id="plan-full" value="full"><span>상담 + 사후 대응<small>전화 상담, 회신 대응까지</small></span><b>440,000원</b></label>
+          <label><input type="radio" name="plan" id="plan-pdf" value="pdf" checked><span>PDF 작성<small>사연을 내용증명으로 정리해 PDF 전달</small></span><b>49,000원</b></label>
+          <label><input type="radio" name="plan" id="plan-check" value="check"><span>변호사 검토<small>보내기 전 변호사가 내용 검토</small></span><b>99,000원</b></label>
+          <label><input type="radio" name="plan" id="plan-consult" value="consult"><span>변호사 상담<small>변호사 검토 + 변호사 상담</small></span><b>440,000원</b></label>
         </div>
       </div>
       <label class="agree" for="agree"><input type="checkbox" id="agree" name="agree"><span><b style="color:var(--ink)">[필수]</b> 개인정보 수집·이용에 동의합니다. 입력한 내용과 자료는 내용증명 작성과 상담에만 쓰고, 사건 종료 후 3년 뒤 폐기합니다.</span></label>
@@ -201,7 +201,7 @@ input:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:0;bord
     <section class="card done" id="s4" hidden>
       <div class="ok" aria-hidden="true">✓</div>
       <h2>의뢰서를 받았습니다</h2>
-      <p class="note">시안이라 실제로는 전송되지 않았습니다. 실제 사이트에서는 여기서 결제 창이 열리고, 변호사가 영업일 24시간 안에 연락드립니다.</p>
+      <p class="note">시안이라 실제로는 전송되지 않았습니다. 실제 사이트에서는 여기서 결제 창이 열리고, 영업일 24시간 안에 초안을 보내드립니다.</p>
       <dl class="summary" id="summary"></dl>
       <button type="button" class="btn btn-ghost" id="restart">처음부터 다시 쓰기</button>
     </section>
@@ -271,8 +271,8 @@ function calc(){
   var today=new Date();today.setHours(0,0,0,0);var left=Math.round((w.to-today)/864e5);
   box.hidden=false;box.className='calc'+(left<0?' late':'');box.innerHTML='';
   var a=document.createElement('span');a.className='big';a.textContent=(w.from?fd(w.from)+' ~ ':'')+fd(w.to)+'까지 상대방에게 도달해야 합니다';
-  var b=document.createElement('span');b.textContent=left<0?'기한이 '+(-left)+'일 지났습니다. 이미 연장되었는지 변호사가 확인해 드립니다.':'마감까지 '+left+'일 남았습니다.'+(left<=10?' 우편 도달에 2~3일 걸리니 서둘러 주세요.':'');
-  var c=document.createElement('small');c.textContent=w.kind+' '+w.role+' 기준. 정확한 기한은 변호사가 다시 확인합니다.';
+  var b=document.createElement('span');b.textContent=left<0?'기한이 '+(-left)+'일 지났습니다. 이미 연장되었을 수 있으니 변호사 상담을 권합니다.':'마감까지 '+left+'일 남았습니다.'+(left<=10?' 우편 도달에 2~3일 걸리니 서둘러 주세요.':'');
+  var c=document.createElement('small');c.textContent=w.kind+' '+w.role+' 기준으로 계산한 참고용 날짜입니다.';
   box.appendChild(a);box.appendChild(b);box.appendChild(c);
 }
 ['endDate','kind-h','kind-s','role-l','role-t'].forEach(function(id){$(id).addEventListener('change',calc)});
@@ -335,7 +335,7 @@ if(o){FIELDS.forEach(function(k){if(o[k])$(k).value=o[k]});
 /* 메인 페이지에서 넘어온 경우 */
 function route(){
   var h=(location.hash||'').slice(1),start=1;
-  if(['review','write','full'].indexOf(h)>-1){$('plan-'+h).checked=true;start=type?2:1;}
+  if(['pdf','check','consult'].indexOf(h)>-1){$('plan-'+h).checked=true;start=type?2:1;}
   if(h.indexOf('t-')===0&&T[h.slice(2)]){setType(h.slice(2));start=2;}
   var sm=/^s-([1-3])$/.exec(h);if(sm){start=+sm[1];if(start>1&&!type)start=1;}
   go(start);
